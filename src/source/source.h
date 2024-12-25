@@ -1,3 +1,13 @@
+/*** 
+ * @Author: suzhou suzhou@360.cn
+ * @Date: 2024-07-30 18:32:00
+ * @LastEditors: suzhou suzhou@360.cn
+ * @LastEditTime: 2024-12-25 17:20:49
+ * @FilePath: /GPUPixel/src/source/source.h
+ * @Description: 
+ * @
+ * @Copyright (c) 2024 by Qihoo 360, All Rights Reserved. 
+ */
 /*
  * GPUPixel
  *
@@ -14,7 +24,9 @@
 #if defined(GPUPIXEL_IOS) || defined(GPUPIXEL_MAC)
 #import "gpupixel_target.h"
 #endif
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
 #include "face_detector.h"
+#endif
 
 NS_GPUPIXEL_BEGIN
 class GPUPIXEL_API Filter;
@@ -55,13 +67,17 @@ class GPUPIXEL_API Source {
       std::shared_ptr<Filter> upToFilter,
       int width = 0,
       int height = 0);
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
   int RegLandmarkCallback(FaceDetectorCallback callback);
+#endif
  protected:
   std::shared_ptr<Framebuffer> _framebuffer;
   RotationMode _outputRotation;
   std::map<std::shared_ptr<Target>, int> _targets;
   float _framebufferScale;
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
   std::shared_ptr<FaceDetector> _face_detector;
+#endif
 };
 
 NS_GPUPIXEL_END

@@ -78,6 +78,7 @@ void SourceImage::init(int width, int height, int channel_count, const unsigned 
 
 void SourceImage::Render() {
   GPUPIXEL_FRAME_TYPE type;
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
   if(_face_detector) {
     _face_detector->Detect(image_bytes.data(),
                            _framebuffer->getWidth(),
@@ -85,7 +86,7 @@ void SourceImage::Render() {
                            GPUPIXEL_MODE_FMT_PICTURE,
                            GPUPIXEL_FRAME_TYPE_RGBA8888);
   }
-  
+#endif
   Source::proceed();
 }
 

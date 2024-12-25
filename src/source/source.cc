@@ -136,7 +136,7 @@ int Source::getRotatedFramebufferWidth() const {
     return 0;
   }
 }
- 
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
 int Source::RegLandmarkCallback(FaceDetectorCallback callback) {
   if(_face_detector == nullptr) {
     // init face detector
@@ -145,7 +145,7 @@ int Source::RegLandmarkCallback(FaceDetectorCallback callback) {
 
   return _face_detector->RegCallback(callback);
 }
-
+#endif
 int Source::getRotatedFramebufferHeight() const {
   if (_framebuffer) {
     if (rotationSwapsSize(_outputRotation)) {

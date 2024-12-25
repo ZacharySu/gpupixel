@@ -49,11 +49,13 @@ void SourceCamera::setFrameData(
         GPUPixelContext::getInstance()->getFramebufferCache()->fetchFramebuffer(
             width, height, true);
   }
+#if defined(GPUPIXEL_ENABLE_FACE_DETECTOR)
   if(_face_detector) {
       _face_detector->Detect(static_cast<const uint8_t *>(pixels), width, height,
                              GPUPIXEL_MODE_FMT_VIDEO,
                              GPUPIXEL_FRAME_TYPE_RGBA8888);
   }
+#endif
   this->setFramebuffer(_framebuffer, outputRotation);
 
   CHECK_GL(glBindTexture(GL_TEXTURE_2D, this->getFramebuffer()->getTexture()));

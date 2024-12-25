@@ -2,10 +2,13 @@
 # --------
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     SET(CURRENT_OS "linux")
+	add_definitions(-DGPUPIXEL_ENABLE_FACE_DETECTOR=true)
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Windows")
     SET(CURRENT_OS "windows")
+	add_definitions(-DGPUPIXEL_ENABLE_FACE_DETECTOR=true)
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
 	SET(CURRENT_OS "macos")
+	add_definitions(-DGPUPIXEL_ENABLE_FACE_DETECTOR=true)
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "iOS")
 	SET(CURRENT_OS "ios")
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Android")
@@ -13,6 +16,7 @@ ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Android")
 ELSEIF(${CMAKE_SYSTEM_NAME} MATCHES "Emscripten")
 	SET(CURRENT_OS "wasm")
 	add_definitions(-D__emscripten__)
+	add_definitions(-DGPUPIXEL_ENABLE_FACE_DETECTOR=true)
 ELSE()
     MESSAGE(FATAL_ERROR "NOT SUPPORT THIS SYSTEM")
 ENDIF()
@@ -50,8 +54,18 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_SOURCE_DIR}/third_party/libyuv/include
 	${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/include
 )
- 
+
 # Add common source file
+IF(${CURRENT_OS} STREQUAL "android" OR ${CURRENT_OS} STREQUAL "ios")	
+FILE(GLOB SOURCE_FILES     
+	"${CMAKE_CURRENT_SOURCE_DIR}/core/*"        
+	"${CMAKE_CURRENT_SOURCE_DIR}/filter/filter.*"         
+	"${CMAKE_CURRENT_SOURCE_DIR}/source/*"       
+	"${CMAKE_CURRENT_SOURCE_DIR}/target/*"                
+	"${CMAKE_CURRENT_SOURCE_DIR}/utils/*"                 
+	"${CMAKE_CURRENT_SOURCE_DIR}/third_party/libyuv/source/*"
+)
+ELSE()
 FILE(GLOB SOURCE_FILES     
 	"${CMAKE_CURRENT_SOURCE_DIR}/core/*"        
 	"${CMAKE_CURRENT_SOURCE_DIR}/filter/*"         
@@ -61,7 +75,7 @@ FILE(GLOB SOURCE_FILES
 	"${CMAKE_CURRENT_SOURCE_DIR}/utils/*"                 
 	"${CMAKE_CURRENT_SOURCE_DIR}/third_party/libyuv/source/*"
 )
-
+ENDIF()
 # Add export header file
 FILE(GLOB EXPORT_HEADER 
 	"${CMAKE_CURRENT_SOURCE_DIR}/core/*.h"         
@@ -76,7 +90,7 @@ FILE(GLOB RESOURCE_FILES
 	"${CMAKE_CURRENT_SOURCE_DIR}/resources/*"                         
 )
 if(${CURRENT_OS} STREQUAL "ios" OR ${CURRENT_OS} STREQUAL "android") 	
-	list(APPEND RESOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/models/vnn_face278_data/face_mobile[1.0.0].vnnmodel")
+	# list(APPEND RESOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/models/vnn_face278_data/face_mobile[1.0.0].vnnmodel")
 else()
 	list(APPEND RESOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/models/vnn_face278_data/face_pc[1.0.0].vnnmodel")
 endif()
@@ -114,7 +128,7 @@ ELSEIF(${CURRENT_OS} STREQUAL "android")													# android
 	FILE(GLOB JNI_SOURCE_FILE  "${CMAKE_CURRENT_SOURCE_DIR}/android/jni/*")
 	list(APPEND SOURCE_FILES ${JNI_SOURCE_FILE})
 
-	LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI})
+	# LINK_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI})
 ENDIF()
 
 # Config project 
@@ -172,21 +186,21 @@ ELSEIF(${CURRENT_OS} STREQUAL "macos" OR ${CURRENT_OS} STREQUAL "ios")
 		LINK_FLAGS "-Wl,-F${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}"
 	)
 ELSEIF(${CURRENT_OS} STREQUAL "android")
-	# 设置要构建的目标库的名称和类型
-	add_library(vnn_kit SHARED IMPORTED)
-	# 设置目标库的实际路径
-	set_target_properties(vnn_kit PROPERTIES IMPORTED_LOCATION
-	${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_kit.so)
+	# # 设置要构建的目标库的名称和类型
+	# add_library(vnn_kit SHARED IMPORTED)
+	# # 设置目标库的实际路径
+	# set_target_properties(vnn_kit PROPERTIES IMPORTED_LOCATION
+	# ${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_kit.so)
 
-	add_library(vnn_core SHARED IMPORTED)
-	# 设置目标库的实际路径
-	set_target_properties(vnn_core PROPERTIES IMPORTED_LOCATION
-	${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_core.so)
+	# add_library(vnn_core SHARED IMPORTED)
+	# # 设置目标库的实际路径
+	# set_target_properties(vnn_core PROPERTIES IMPORTED_LOCATION
+	# ${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_core.so)
 
-	add_library(vnn_face SHARED IMPORTED)
-	# 设置目标库的实际路径
-	set_target_properties(vnn_face PROPERTIES IMPORTED_LOCATION
-	${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_face.so)
+	# add_library(vnn_face SHARED IMPORTED)
+	# # 设置目标库的实际路径
+	# set_target_properties(vnn_face PROPERTIES IMPORTED_LOCATION
+	# ${CMAKE_CURRENT_SOURCE_DIR}/third_party/vnn/libs/${CURRENT_OS}/${ANDROID_ABI}/libvnn_face.so)
 ELSEIF(${CURRENT_OS} STREQUAL "wasm")
 	set_target_properties(${PROJECT_NAME} PROPERTIES 
 						SUFFIX ".wasm"
@@ -233,10 +247,7 @@ ELSEIF(${CURRENT_OS} STREQUAL "ios")
 					-framework CoreVideo  	\
 					-framework CoreGraphics \
 					-framework AVFoundation \
-					-framework CoreMedia \
-					-framework vnn_kit_ios \
-					-framework vnn_core_ios \
-					-framework vnn_face_ios"
+					-framework CoreMedia"
 	)
 ELSEIF(${CURRENT_OS} STREQUAL "android")
 	TARGET_LINK_LIBRARIES(
@@ -245,10 +256,7 @@ ELSEIF(${CURRENT_OS} STREQUAL "android")
 					android
 					GLESv3
 					EGL
-					jnigraphics
-					vnn_core
-					vnn_kit
-					vnn_face)
+					jnigraphics)
 ENDIF()
 
 MACRO(EXPORT_INCLUDE)
