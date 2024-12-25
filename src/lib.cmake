@@ -48,6 +48,7 @@ INCLUDE_DIRECTORIES(
 	${CMAKE_CURRENT_SOURCE_DIR}/face_detect
 	${CMAKE_CURRENT_SOURCE_DIR}/android/jni
 	${CMAKE_CURRENT_SOURCE_DIR}/target/objc
+	${CMAKE_CURRENT_SOURCE_DIR}/transition
 	${CMAKE_CURRENT_SOURCE_DIR}/third_party/glfw/include
 	${CMAKE_CURRENT_SOURCE_DIR}/third_party/stb
 	${CMAKE_CURRENT_SOURCE_DIR}/third_party/glad/include
@@ -59,7 +60,9 @@ INCLUDE_DIRECTORIES(
 IF(${CURRENT_OS} STREQUAL "android" OR ${CURRENT_OS} STREQUAL "ios")	
 FILE(GLOB SOURCE_FILES     
 	"${CMAKE_CURRENT_SOURCE_DIR}/core/*"        
-	"${CMAKE_CURRENT_SOURCE_DIR}/filter/filter.*"         
+	"${CMAKE_CURRENT_SOURCE_DIR}/filter/filter.*"  
+	"${CMAKE_CURRENT_SOURCE_DIR}/filter/brightness_filter.*"  
+	"${CMAKE_CURRENT_SOURCE_DIR}/transition/*"        
 	"${CMAKE_CURRENT_SOURCE_DIR}/source/*"       
 	"${CMAKE_CURRENT_SOURCE_DIR}/target/*"                
 	"${CMAKE_CURRENT_SOURCE_DIR}/utils/*"                 
@@ -83,7 +86,8 @@ FILE(GLOB EXPORT_HEADER
 	"${CMAKE_CURRENT_SOURCE_DIR}/source/*.h"       
 	"${CMAKE_CURRENT_SOURCE_DIR}/target/*.h"                      
 	"${CMAKE_CURRENT_SOURCE_DIR}/utils/*.h"                 
-	"${CMAKE_CURRENT_SOURCE_DIR}/face_detect/*.h"                 
+	"${CMAKE_CURRENT_SOURCE_DIR}/face_detect/*.h"     
+	"${CMAKE_CURRENT_SOURCE_DIR}/transition/*.h"             
 )
 
 FILE(GLOB RESOURCE_FILES 

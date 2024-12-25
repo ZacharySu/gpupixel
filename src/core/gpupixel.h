@@ -1,9 +1,12 @@
-
-/*
- * GPUPixel
- *
- * Created by PixPark on 2021/6/24.
- * Copyright © 2021 PixPark. All rights reserved.
+/*** 
+ * @Author: suzhou suzhou@360.cn
+ * @Date: 2024-07-30 18:32:00
+ * @LastEditors: suzhou suzhou@360.cn
+ * @LastEditTime: 2024-12-25 21:44:12
+ * @FilePath: /GPUPixel/src/core/gpupixel.h
+ * @Description: 
+ * @
+ * @Copyright (c) 2024 by Qihoo 360, All Rights Reserved. 
  */
 
 #pragma once
@@ -38,6 +41,9 @@
 
 // base filters
 #include "filter.h"
+#if defined(GPUPIXEL_IOS) || defined(GPUPIXEL_ANDROID)
+#include "brightness_filter.h"
+#else
 #include "filter_group.h"
 
 // face filters
@@ -87,3 +93,8 @@
 #include "toon_filter.h"
 #include "weak_pixel_inclusion_filter.h"
 #include "white_balance_filter.h"
+#endif
+
+// Transition
+#include "transition.h"
+#include "PolkaDotsCurtain_transition.h"

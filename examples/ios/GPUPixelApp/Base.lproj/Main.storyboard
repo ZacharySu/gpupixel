@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="00K-Ms-Gjb">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="00K-Ms-Gjb">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,84 +18,48 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="Gzh-ND-EMZ" kind="relationship" relationship="rootViewController" id="raA-bc-il3"/>
+                        <segue destination="mY6-qb-ptl" kind="relationship" relationship="rootViewController" id="6n9-4f-99Z"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nV5-yL-1jp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-306" y="137"/>
         </scene>
-        <!--GPUPixel-->
-        <scene sceneID="Ipk-Ef-EC9">
+        <!--View Controller-->
+        <scene sceneID="AmV-C3-cWJ">
             <objects>
-                <viewController id="Gzh-ND-EMZ" customClass="ViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="eY7-cK-h5j">
+                <viewController id="mY6-qb-ptl" customClass="ViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v6u-vO-cpZ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MJN-nm-sml">
-                                <rect key="frame" x="178" y="152" width="59" height="35"/>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="xkb-Vx-s3B">
+                                <rect key="frame" x="26" y="798" width="302" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="视频"/>
                                 <connections>
-                                    <segue destination="wKd-1l-hyO" kind="show" id="lnM-hf-Erb"/>
+                                    <action selector="sliderAction:" destination="mY6-qb-ptl" eventType="valueChanged" id="Ghl-aa-1sr"/>
                                 </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nxs-CJ-hCI">
-                                <rect key="frame" x="178" y="207" width="59" height="35"/>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="c3s-RC-Mnf">
+                                <rect key="frame" x="334" y="802" width="60" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="图片"/>
-                                <connections>
-                                    <segue destination="Uua-xU-9Z8" kind="show" id="nc7-ru-BY9"/>
-                                </connections>
-                            </button>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="hQC-qE-vcX"/>
+                        <viewLayoutGuide key="safeArea" id="W9b-01-iZp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="GPUPixel" id="TuV-IG-qGy"/>
+                    <navigationItem key="navigationItem" id="ItL-q5-0YQ"/>
                     <connections>
-                        <outlet property="imageFilterTestBtn" destination="Nxs-CJ-hCI" id="QQN-en-xub"/>
-                        <outlet property="videoFilterTestBtn" destination="MJN-nm-sml" id="Jhc-wf-22P"/>
+                        <outlet property="progressLable" destination="c3s-RC-Mnf" id="QJX-uW-GvR"/>
+                        <outlet property="progressSlider" destination="xkb-Vx-s3B" id="zHd-aS-ysK"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rLw-dV-q0l" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rh3-eZ-HOw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="650.72463768115949" y="136.60714285714286"/>
-        </scene>
-        <!--Video Filter-->
-        <scene sceneID="pmW-rM-uTh">
-            <objects>
-                <viewController id="wKd-1l-hyO" customClass="VideoFilterController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="1cC-1w-Rgs">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="arW-EX-z7K"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Video Filter" id="HgI-OU-Tda"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="xFM-jc-zfM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1794" y="-55"/>
-        </scene>
-        <!--Image Filter-->
-        <scene sceneID="riN-KP-Mcp">
-            <objects>
-                <viewController id="Uua-xU-9Z8" customClass="ImageFilterController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="FOe-9w-Mtp">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="kCi-cS-zcX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Image Filter" id="Dl8-Tb-qdM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6gb-89-I1L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1814" y="672"/>
+            <point key="canvasLocation" x="598.55072463768124" y="136.60714285714286"/>
         </scene>
     </scenes>
     <resources>
