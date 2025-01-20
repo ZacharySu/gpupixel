@@ -2,7 +2,7 @@
  * @Author: suzhou suzhou@360.cn
  * @Date: 2024-12-25 21:33:14
  * @LastEditors: suzhou suzhou@360.cn
- * @LastEditTime: 2024-12-25 21:53:22
+ * @LastEditTime: 2024-12-26 10:30:03
  * @FilePath: /GPUPixel/src/transition/PolkaDotsCurtain_transition.cc
  * @Description: 
  * 
@@ -13,7 +13,7 @@
 
 NS_GPUPIXEL_BEGIN
 #if defined(GPUPIXEL_IOS) || defined(GPUPIXEL_ANDROID)
-
+// https://gl-transitions.com/editor/PolkaDotsCurtain
 const std::string kPolkaDotsCurtainTransitionString = R"(
     const float SQRT_2 = 1.414213562373;
     uniform float dots;// = 20.0;

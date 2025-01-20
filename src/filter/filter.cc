@@ -68,6 +68,8 @@ std::shared_ptr<Filter> Filter::createWithFragmentShaderString(
 bool Filter::initWithShaderString(const std::string& vertexShaderSource,
                                   const std::string& fragmentShaderSource,
                                   int inputNumber /* = 1*/) {
+    NSLog(@"Vertex shader:\n%s", vertexShaderSource.c_str());
+    NSLog(@"Fragment shader:\n%s", fragmentShaderSource.c_str());
   _inputNum = inputNumber;
   _filterProgram =
       GLProgram::createByShaderString(vertexShaderSource, fragmentShaderSource);
