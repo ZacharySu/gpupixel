@@ -12,6 +12,8 @@ buildscript {
     }
 }
 
+println("20250122b-build.gradle-01-----------------root build.gradle----------------------------------------->")
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

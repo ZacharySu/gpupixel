@@ -16,7 +16,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags '-std=c++17'
-                abiFilters 'armeabi-v7a', 'arm64-v8a'
+                abiFilters 'arm64-v8a', 'armeabi-v7a'
             }
         }
     }
@@ -31,6 +31,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    println("20250122b-build.gradle-01-----------------gpupixel build.gradle----------------------------------------->")
     externalNativeBuild {
         cmake {
             path file('../../../CMakeLists.txt')
@@ -44,13 +45,13 @@ android {
 
             reset()
 
-            include "armeabi-v7a", "arm64-v8a"
+            include "arm64-v8a", "armeabi-v7a"
 
             universalApk true
         }
     }
 }
-println("20250122b-build.gradle-01-----------------gpupixel build.gradle----------------------------------------->")
+println("20250122b-build.gradle-02-----------------gpupixel build.gradle----------------------------------------->")
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'

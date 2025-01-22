@@ -12,3 +12,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "GPUPixelDemo"
 include ':app'
+
+include ':libgpupixel'
+project(':libgpupixel').projectDir = new File('../../../src/android/gpupixel/gpupixel')

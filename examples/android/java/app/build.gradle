@@ -42,16 +42,16 @@ android {
         }
     }
 }
-
+println("20250122b-build.gradle-01-----------------app build.gradle----------------------------------------->")
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
-//    implementation project(path: ':gpupixel')
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
-
-    implementation(name: 'gpupixel', ext: 'aar')
+    implementation project(path: ':libgpupixel')
+//    implementation(name: 'gpupixel', ext: 'aar')
 }
